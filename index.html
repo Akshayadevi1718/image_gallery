@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Image Highlighter Gallery</title>
+    <title>Thalapathy Vijay Interactive Gallery</title>
     <style>
-        /* ==========================================
-           PRO PALETTE: DEEP OBSIDIAN & NEON GLOWS
-           ========================================== */
         body {
             font-family: 'Segoe UI', system-ui, sans-serif;
             background-color: #030712;
@@ -23,9 +20,9 @@
 
         .container {
             width: 100%;
-            max-width: 900px;
+            max-width: 1000px;
             text-align: center;
-            animation: fadeIn 0.6s ease-out;
+            animation: initialFadePage 0.6s ease-out;
         }
 
         h1 {
@@ -44,12 +41,9 @@
             font-size: 1.1rem;
         }
 
-        /* ==========================================
-           GALLERY GRID ARCHITECTURE
-           ========================================== */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
             padding: 10px;
         }
@@ -61,23 +55,22 @@
             background-color: #111827;
             border: 2px solid #1f2937;
             cursor: pointer;
-            aspect-ratio: 4 / 3;
+            aspect-ratio: 3 / 4;
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            opacity: 0.6; /* Dim unselected images slightly */
+            opacity: 0.4;
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            pointer-events: none; /* Crucial so event.target hits the wrapper div */
+            pointer-events: none;
             transition: transform 0.4s ease;
         }
 
-        /* Hover effect on items */
         .gallery-item:hover {
-            opacity: 0.85;
+            opacity: 0.7;
             border-color: #374151;
             transform: translateY(-4px);
         }
@@ -86,9 +79,6 @@
             transform: scale(1.05);
         }
 
-        /* ==========================================
-           ACTIVE HIGHLIGHT STYLE (NEON CYAN BURST)
-           ========================================== */
         .gallery-item.active {
             opacity: 1;
             border-color: #06b6d4;
@@ -97,70 +87,94 @@
                         0 10px 30px rgba(0, 0, 0, 0.6);
         }
 
-        /* ==========================================
-           ANIMATIONS (FADE-IN TASK REQUIREMENT)
-           ========================================== */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        .gallery-item.active img {
+            animation: elementFadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes initialFadePage {
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes elementFadeIn {
+            from { 
+                opacity: 0.3;
+                filter: brightness(0.6) blur(4px);
+            }
+            to { 
+                opacity: 1;
+                filter: brightness(1) blur(0px);
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>INTERACTIVE IMAGE HIGHLIGHTER</h1>
-        <p>InternEzy Dashboard Task — Click an image to lock focus and reveal full exposure.</p>
+        <h1>THALAPATHY VIJAY GALLERY</h1>
+        <p>InternEzy Interactive Task — Click any frame to focus and activate the core layout engine.</p>
 
         <div class="gallery-grid" id="image-gallery">
             
             <div class="gallery-item active">
-                <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=500&auto=format&fit=crop" alt="Abstract Neon 1">
+                <img src="one.jpeg" alt="Thalapathy Vijay 1">
             </div>
 
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop" alt="Abstract Neon 2">
+                <img src="two.jpeg" alt="Thalapathy Vijay 2">
             </div>
 
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=500&auto=format&fit=crop" alt="Abstract Neon 3">
+                <img src="three.jpeg" alt="Thalapathy Vijay 3">
             </div>
 
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1604871000636-074fa5117945?w=500&auto=format&fit=crop" alt="Abstract Neon 4">
+                <img src="four.jpeg" alt="Thalapathy Vijay 4">
             </div>
 
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=500&auto=format&fit=crop" alt="Abstract Neon 5">
+                <img src="five.jpeg" alt="Thalapathy Vijay 5">
             </div>
 
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=500&auto=format&fit=crop" alt="Abstract Neon 6">
+                <img src="six.jpeg" alt="Thalapathy Vijay 6">
+            </div>
+
+            <div class="gallery-item">
+                <img src="seven.jpeg" alt="Thalapathy Vijay 7">
+            </div>
+
+            <div class="gallery-item">
+                <img src="eight.jpeg" alt="Thalapathy Vijay 8">
+            </div>
+
+            <div class="gallery-item">
+                <img src="nine.jpeg" alt="Thalapathy Vijay 9">
             </div>
 
         </div>
     </div>
 
     <script>
-        // 1. Get the parent gallery container element
         const gallery = document.getElementById('image-gallery');
 
-        // 2. Attach a single Event Listener to the parent container (Event Delegation pattern)
         gallery.addEventListener('click', function(event) {
-            
-            // 3. Use event.target to identify exactly which element was clicked
             const clickedElement = event.target;
 
-            // Check if the clicked element is a gallery item card container
             if (clickedElement.classList.contains('gallery-item')) {
-                
-                // 4. Ensure only ONE active item at a time by finding and clearing the previous active item
                 const currentActive = gallery.querySelector('.gallery-item.active');
+                
                 if (currentActive) {
                     currentActive.classList.remove('active');
+                    
+                    const oldImg = currentActive.querySelector('img');
+                    if (oldImg) {
+                        oldImg.style.animation = 'none';
+                        oldImg.offsetHeight; 
+                        oldImg.style.animation = '';
+                    }
                 }
 
-                // 5. Highlight the newly selected image item by adding the active class
                 clickedElement.classList.add('active');
             }
         });
